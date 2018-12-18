@@ -1,0 +1,121 @@
+.container {
+    width: 600px;
+    height: auto;
+    background-color: #F5F8FA;
+    border-radius: 25px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+h1 {
+    font-style: helvetica;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+
+
+.title {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 115px 75px;
+}
+
+.logo {
+    grid-area: 1/1/2/2;
+}
+
+#VI {
+    grid-area: 1/2/2/3;
+    align-self: end;
+    margin: 0;
+}
+
+#Traveltitle {
+    grid-area: 2/2/3/3;
+    margin-top: 0;
+}
+
+
+.form1inpt {
+    display: flex ;
+    margin-top: 15px;
+    color:#838383;
+    font-weight: 300;
+    font-size: 16px;
+    
+}
+
+.form1inpt .label {
+    flex: 1;
+    text-align: right;
+    align-self: center;
+}
+
+.form1inpt .field {
+    flex: 3;
+    margin-right: 30px;
+    margin-left: 10px;
+}
+
+input {
+    width: 100%;
+    border-radius: 7px;
+    border: 1px solid lightgrey;
+}
+
+textarea {
+    width: 100%;
+    border-radius: 7px;
+    border:1px solid lightgrey;
+}
+
+input[type=text] {
+    height: 25px;
+}
+
+
+input[type="radio"] {
+    display: inline-block;
+    width: 15px;
+    margin: 10px 5px 0 0;
+    vertical-align: 2px;
+}
+
+h2 {
+    margin-top: 50px;
+    margin-left: 45px;
+    font-style: helvetica;
+    font-size: 26px;
+    font-weight: 400;
+}
+#receipts {
+  margin-right: 60px;
+  margin-left: 40px;
+}
+
+
+#receipts input{
+    width: 138px;
+    height: 25px;
+}
+
+#receipts input.button{
+    width: 40px;
+    background-color: #F5F8FA;
+    border: 1px solid lightgrey;
+}
+
+button {
+    background-color: #019dd3;
+    border: none;
+    color: white;
+    font-weight: 300;
+    padding: 10px;
+    width: 100px;
+    margin-top: 25px;
+    margin-left: 250px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}

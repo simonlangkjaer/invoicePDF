@@ -1,0 +1,236 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Travel Invoice VI</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="InvoiceTravel.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <img class="logo" src="img/VI_logo.png">
+            <h1 id="VI">Virtual Identity</h1>
+            <h1 id="Traveltitle">Travel expense accounting</h1>
+        </div>
+        <form class="form1">
+            <div class="form1inpt"><label class="label">Name of traveller</label>
+                <div class="field"><input class="inputname" type="text" name="text" required> </div>
+            </div>
+
+            <div class="form1inpt"><label class="label">Todays date</label>
+                <div class="field"><input class="inputdate" type="date" name="date" required> </div>
+            </div>
+
+            <div class="form1inpt"><label class="label"></label><br>
+                <div class="field"><input class="domestic" type="radio" name="check" value="domestic trip">Domestic trip<br>
+                    <input class="abroad" type="radio" name="check" value="trip abroad">Trip abroad</div>
+            </div>
+
+            <div class="form1inpt"><label class="label">Start of the trip</label>
+                <div class="field"><input class="startoftrip" type="date" name="date" required> </div>
+            </div>
+
+            <div class="form1inpt"><label class="label">Time</label>
+                <div class="field"><input class="timingstart" type="time" name="time" required> </div>
+            </div>
+
+            <div class="form1inpt"><label class="label">End of the trip</label>
+                <div class="field"><input class="endoftrip" type="date" name="datetime" required> </div>
+            </div>
+
+            <div class="form1inpt"><label class="label">Time</label>
+                <div class="field"><input class="endoftime" type="time" name="time" required> </div>
+            </div>
+
+            <div class="form1inpt"><label class="label">Reason of the trip</label>
+                <div class="field"><textarea class="reasonoftrip" rows="4"></textarea></div>
+            </div>
+
+            <div class="form1inpt"><label class="label">Project number</label>
+                <div class="field"><input class="numberofproject" type="text" name="text" required> </div>
+            </div>
+
+            <div class="form1inpt"><label class="label">Destination</label>
+                <div class="field"><input class="destination" type="text" name="text" placeholder=" (If several destinations, list one after another)"
+                        required> </div>
+            </div>
+
+            <h2>Receipts</h2>
+
+            <table id="receipts">
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>No.</th>
+                        <th>Amount in €</th>
+                        <th>Text</th>
+                        <th>Cost center</th>
+                    </tr>
+                    <tr>
+                            <td><input type="button" class="button" value="+" onclick="addField();"></td>
+                            <td>1</td>
+                            <td><input class="costamount" type="number" name="amount" required /></td>
+                            <td><input class="costtext" type="text" name="explain" required /></td>
+                            <td><input class="costcenter" type="text" name="costcenter" required /></td>
+                            
+                    </tr>
+                </tbody>   
+                
+            </table>
+           
+
+    </form>
+
+    <button>Create file</button>
+
+
+    </div>
+
+
+
+    <script src="TravelInvoice.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" 
+    integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" 
+    crossorigin="anonymous"></script>
+
+    <script>
+            // init the jsPDF library
+            const pdf = new jsPDF();
+            // select the button
+            let button = document.querySelector('button');
+            // select the input
+            let nameput = document.querySelector('.inputname');
+
+            let dateput = document.querySelector('.inputdate');
+
+            let domeput = document.querySelector('.domestic');
+
+            let abroadput = document.querySelector('.abroad');
+
+            let tripstart = document.querySelector('.startoftrip')
+
+            let timestart = document.querySelector('.timingstart')
+
+            let tripend = document.querySelector('.endoftrip')
+        
+            let timeend = document.querySelector('.endoftime')
+
+            let tripreason = document.querySelector('.reasonoftrip')
+
+            let projectnumber = document.querySelector('.numberofproject')
+
+            let destinationlist = document.querySelector('.destination')
+
+            let costnb = document.querySelector('.costamount')
+
+            let costtxt = document.querySelector('.costtext')
+
+            let costct = document.querySelector('.costcenter')
+
+            // add 'click' event listener for the button
+            button.addEventListener('click', printPDF)
+
+            //    const inputvalue = '';
+            //  if(domeput.checked) {
+            //         if(domeput.value === 'abroad') {
+            //             inputValue = 'Travelling abroad'; // and also here
+            //         }
+            //         if(domeput.value === 'domestic') {
+            //             inputValue = 'bla'; // and also here
+            //         }
+            //     }
+
+            // actual PDF options
+            function printPDF() {
+                // @param 1 - Coordinate (in units declared at inception of PDF document) against left edge of the page
+                // @param 2 - Coordinate (in units declared at inception of PDF document) against upper edge of the page
+                // @param 3 - String or array of strings to be added to the page. Each line is shifted one line down per font, spacing settings declared before this call.
+               
+                pdf.setFont("helvetica");
+                pdf.setFontType("bold");
+                pdf.setFontSize(30);
+
+                pdf.text(63, 30, 'Travel expenses')
+
+                pdf.setFont("helvetica");
+                pdf.setFontType("normal");
+                pdf.setFontSize(12);
+
+                pdf.text(30, 50, `Name: ${nameput.value}`);
+
+                pdf.text(30, 60, `Date: ${dateput.value}`);
+
+                pdf.text(30, 80, `Travelling domestically: ${domeput.checked}`); // we have to figure something out here
+
+                pdf.text(100, 80, `Travelling abroad: ${abroadput.checked}`); // and also here
+
+                pdf.text(30, 100, `Start of trip: ${tripstart.value}`);
+
+                pdf.text(100, 100, `Time: ${timestart.value}`);
+
+                pdf.text(30, 110, `End of trip: ${tripend.value}`);
+
+                pdf.text(100, 110, `Time: ${timeend.value}`);
+
+                pdf.setFontSize(10);
+
+                pdf.text(30, 125, `Reason of trip: ${tripreason.value}`);
+
+                pdf.setFontSize(12);
+
+                pdf.text(30, 150, `Project number: ${projectnumber.value}`);
+
+                pdf.text(30, 160, `Destinations: ${destinationlist.value}`);
+
+                pdf.setFontSize(10);
+                
+                pdf.text(30, 180, `Cost: ${costnb.value} euros`);     
+
+                pdf.text(80, 180, `Text: ${costtxt.value}`);  
+
+                pdf.text(130, 180, `Center: ${costct.value}`);  
+
+                pdf.setFont("helvetica");
+                pdf.setFontSize(24);
+
+                pdf.text(30, 275, 'Signature: ___________________')
+
+                // save the PDF document (downloadable)
+                pdf.save();
+                }
+
+//some interactive radio buttons were created, but i am sure we dont need them (cool for backup)!
+
+
+            // pdf.text(50, 165, 'Trip abroad');
+
+            // pdf.text(70, 165, 'Domestic trip');
+
+            // var radioGroup = new RadioButton();
+            // radioGroup.V = "/Test";
+            // radioGroup.Subtype = "Form";
+
+            // pdf.addField(radioGroup);
+
+            // var radioButton1 = radioGroup.createOption("Test");
+            // radioButton1.Rect = [50, 160, 30, 10];
+            // radioButton1.AS = "/Test";
+
+            // var radioButton2 = radioGroup.createOption("Test2");
+            // radioButton2.Rect = [80, 160, 30, 10];
+
+            // radioGroup.setAppearance(AcroForm.Appearance.RadioButton.Cross);
+                   
+        </script>
+    
+</body>
+
+
+
+</html>
